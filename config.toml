@@ -1,5 +1,5 @@
 baseURL = "https://symeonmanis.github.io/"
-#title = "Simos Manis"
+title = "Simos Manis | Software Engineer"
 theme = "hugo-coder"
 languageCode = "en"
 defaultContentLanguage = "en"
