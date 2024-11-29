@@ -17,12 +17,13 @@ author = "Simos Manis"
 description = "Simos Manis personal website"
 keywords = "blog,developer,personal"
 info = ["Software Engineer"]
-avatarURL = "images/profile_photo.jpg"
+avatarURL = "images/profile_photo.webp"
 
-faviconSVG = "images/favicon.svg"
-favicon_32 = "images/favicon-32x32.png"
-favicon_16 = "images/favicon-16x16.png"
-touchIcon = "images/apple-touch-icon.png"
+faviconSVG = "images/favicon/favicon.svg"
+favicon_32 = "images/favicon/favicon-32x32.png"
+favicon_16 = "images/favicon/favicon-16x16.png"
+touchIcon = "images/favicon/apple-touch-icon.png"
+manifest = "images/favicon/site.webmanifest"
 
 #gravatar = "john.doe@example.com"
 #dateFormat = "January 2, 2006"
