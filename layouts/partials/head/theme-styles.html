@@ -1,6 +1,6 @@
 <link rel="preload" href="/fonts/forkawesome-webfont.woff2?v=1.2.0" as="font" type="font/woff2" crossorigin>
 
-{{ if .Site.IsServer }}
+{{ if hugo.IsServer }}
 {{ $styles := resources.Get "css/coder.css" | resources.ExecuteAsTemplate "style.coder.css" . }}
 <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
 {{ else }}
