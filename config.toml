@@ -3,7 +3,8 @@ title = "Simos Manis | Software Engineer"
 theme = "hugo-coder"
 languageCode = "en"
 defaultContentLanguage = "en"
-paginate = 20
+[pagination]
+    pagerSize = 10
 enableEmoji = true
 enableRobotsTXT = true
 
