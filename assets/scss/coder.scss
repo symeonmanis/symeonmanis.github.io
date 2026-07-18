@@ -54,7 +54,10 @@ $window-header-bg: #eff1ee;
 $window-rule: #dee2dd;
 $window-accent: #1a7f37;
 $window-accent-soft: #e4f7e9;
-$window-muted: #67716b;
+// #67716b measured 4.45:1 on $window-header-bg (needs 4.5:1 for WCAG AA
+// body text) — darkened slightly so every use of this color clears the
+// bar with margin, not just the ones that already passed.
+$window-muted: #5c655f;
 $page-bg: #f6f7f5;
 $page-bg-grid: #e9ebe7;
 
