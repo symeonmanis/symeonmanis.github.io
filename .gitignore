@@ -21,3 +21,8 @@
 go.work
 
 .idea
+
+# Hugo build output and cache (deployed via GitHub Actions, not committed)
+/public/
+/resources/_gen/
+.hugo_build.lock
