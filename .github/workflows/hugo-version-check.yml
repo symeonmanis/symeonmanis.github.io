@@ -1,0 +1,57 @@
+name: Check for new Hugo release
+
+# Dependabot has no ecosystem for "a version number embedded in a shell
+# script", so it can't track the HUGO_VERSION pin in deploy.yaml on its
+# own. This does the equivalent by hand: check monthly for a newer
+# Hugo release, validate the build against it, and only then open a PR.
+on:
+  schedule:
+    - cron: "0 6 1 * *" # 06:00 UTC on the 1st of each month
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Get latest Hugo release
+        id: latest
+        run: |
+          latest=$(curl -fsSL https://api.github.com/repos/gohugoio/hugo/releases/latest | jq -r .tag_name | sed 's/^v//')
+          echo "version=$latest" >> "$GITHUB_OUTPUT"
+
+      - name: Get current pinned version
+        id: current
+        run: |
+          echo "version=$(grep -oP '(?<=HUGO_VERSION: ).*' .github/workflows/deploy.yaml)" >> "$GITHUB_OUTPUT"
+
+      - name: Bump pin and validate build
+        if: steps.latest.outputs.version != steps.current.outputs.version
+        run: |
+          sed -i "s/HUGO_VERSION: .*/HUGO_VERSION: ${{ steps.latest.outputs.version }}/" .github/workflows/deploy.yaml
+          wget -O "${{ runner.temp }}/hugo.deb" "https://github.com/gohugoio/hugo/releases/download/v${{ steps.latest.outputs.version }}/hugo_extended_${{ steps.latest.outputs.version }}_linux-amd64.deb"
+          sudo dpkg -i "${{ runner.temp }}/hugo.deb"
+          sudo snap install dart-sass
+          hugo --gc --minify --baseURL "https://simosmanis.gr/"
+
+      - name: Open pull request
+        if: steps.latest.outputs.version != steps.current.outputs.version
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "Bump Hugo to v${{ steps.latest.outputs.version }}"
+          title: "Bump Hugo to v${{ steps.latest.outputs.version }}"
+          body: |
+            Bumps the pinned Hugo version used in CI from `${{ steps.current.outputs.version }}` to `${{ steps.latest.outputs.version }}`.
+
+            The build was already validated against this version in this workflow run before opening the PR.
+          branch: bump-hugo-version
+          delete-branch: true

@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Keep the pinned action versions in .github/workflows/*.yaml current.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+
+  # Keep the hugo-coder theme submodule current.
+  - package-ecosystem: "gitsubmodule"
+    directory: "/"
+    schedule:
+      interval: "monthly"
