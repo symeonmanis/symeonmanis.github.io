@@ -1,0 +1,36 @@
+<section class="container centered">
+  <div class="stage">
+    {{ if not .Site.Params.hideColorSchemeToggle }}
+    <button id="dark-mode-toggle" class="theme-toggle" type="button" aria-label="Toggle theme">
+      <svg class="icon-sun" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <circle cx="10" cy="10" r="3.6"></circle>
+        <path d="M10 1.8v2M10 16.2v2M18.2 10h-2M3.8 10h-2M15.6 4.4l-1.4 1.4M5.8 14.2l-1.4 1.4M15.6 15.6l-1.4-1.4M5.8 5.8 4.4 4.4" stroke-linecap="round"></path>
+      </svg>
+      <svg class="icon-moon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <path d="M17 11.2A7.2 7.2 0 0 1 8.8 3a7.2 7.2 0 1 0 8.2 8.2Z"></path>
+      </svg>
+    </button>
+    {{ end }}
+
+    <div class="window">
+      <div class="titlebar">
+        <span class="path">{{ .Site.Params.author | lower | replaceRE " " "-" }} &mdash; zsh</span>
+        <span class="status"><span class="status-dot" aria-hidden="true"></span>available</span>
+      </div>
+      <div class="card">
+        <div class="header-row">
+          {{ partialCached "home/avatar.html" . }}
+          <div class="name-block">
+            {{ partialCached "home/author.html" . }}
+          </div>
+        </div>
+
+        {{ partialCached "home/social.html" . }}
+      </div>
+    </div>
+
+    <footer class="footer">{{ partial "footer/copyright.html" . }}</footer>
+  </div>
+
+  {{ partialCached "home/extensions.html" . }}
+</section>

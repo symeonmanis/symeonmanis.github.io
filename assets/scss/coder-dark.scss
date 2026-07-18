@@ -1,0 +1,142 @@
+// Project override of themes/hugo-coder/assets/scss/coder-dark.scss.
+//
+// Dark-mode colors for the "editor window" homepage treatment (see
+// coder.scss) are appended at the end. This has to live in its own file
+// rather than alongside the light-mode rules in coder.scss: the theme
+// compiles light and dark into two separate stylesheets loaded
+// light-first, and scopes dark rules with `body.colorscheme-dark` /
+// `body.colorscheme-auto` + `prefers-color-scheme`. Putting dark
+// overrides in coder.scss would load them *before* the theme's own
+// coder-dark.css and lose the cascade to it; appending them here, after
+// the theme's own dark partials, wins the same way the theme's own
+// overrides do.
+//
+// The import list itself is trimmed to match coder.scss's light-mode
+// list — see the comment there for why notices/tabs/taxonomies/
+// pagination/mastodon/float are dropped.
+@import "variables";
+@import "base_dark";
+@import "content_dark";
+@import "navigation_dark";
+@import "footer_dark";
+@import "syntax_dark";
+
+$window-bg-dark: #161a17;
+$window-header-bg-dark: #1d211e;
+$window-rule-dark: #272c28;
+$window-accent-dark: #3fb950;
+$window-accent-soft-dark: #16281b;
+$window-muted-dark: #8b948e;
+$page-bg-dark: #0f1210;
+$page-bg-grid-dark: #171b18;
+
+@keyframes window-pulse-dark {
+  0% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.45);
+  }
+  70% {
+    box-shadow: 0 0 0 0.6rem rgba(63, 185, 80, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(63, 185, 80, 0);
+  }
+}
+
+@mixin window-dark {
+  background: radial-gradient(circle at 1px 1px, $page-bg-grid-dark 1px, transparent 0) 0 0 / 28px 28px,
+    $page-bg-dark;
+
+  .window {
+    background: $window-bg-dark;
+    border-color: $window-rule-dark;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 12px 32px -16px rgba(0, 0, 0, 0.6);
+  }
+
+  .titlebar {
+    background: $window-header-bg-dark;
+    border-color: $window-rule-dark;
+    color: $window-muted-dark;
+  }
+
+  .status-dot {
+    background: $window-accent-dark;
+    animation-name: window-pulse-dark;
+  }
+
+  .name-block {
+    h1 {
+      color: $fg-color-dark;
+    }
+
+    h2 {
+      color: $window-muted-dark;
+
+      &::before {
+        color: $window-accent-dark;
+      }
+    }
+  }
+
+  .card ul a {
+    border-color: $window-rule-dark;
+    color: $window-muted-dark;
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $window-accent-dark;
+        border-color: $window-accent-dark;
+        background: $window-accent-soft-dark;
+      }
+    }
+
+    &:focus-visible {
+      color: $window-accent-dark;
+      border-color: $window-accent-dark;
+      background: $window-accent-soft-dark;
+      outline-color: $window-accent-dark;
+    }
+  }
+
+  .theme-toggle {
+    border-color: $window-rule-dark;
+    background: $window-bg-dark;
+    color: $window-muted-dark;
+
+    .icon-sun {
+      display: none;
+    }
+
+    .icon-moon {
+      display: block;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      &:hover {
+        color: $window-accent-dark;
+        border-color: $window-accent-dark;
+        background: $window-accent-soft-dark;
+      }
+    }
+
+    &:focus-visible {
+      color: $window-accent-dark;
+      border-color: $window-accent-dark;
+      background: $window-accent-soft-dark;
+      outline-color: $window-accent-dark;
+    }
+  }
+
+  .footer {
+    color: $window-muted-dark;
+  }
+}
+
+body.colorscheme-dark {
+  @include window-dark();
+}
+
+body.colorscheme-auto {
+  @media (prefers-color-scheme: dark) {
+    @include window-dark();
+  }
+}
