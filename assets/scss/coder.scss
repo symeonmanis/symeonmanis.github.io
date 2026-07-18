@@ -1,0 +1,23 @@
+// Project override of themes/hugo-coder/assets/scss/coder.scss.
+//
+// Identical to the theme's version except the font-awesome/* imports
+// (which pull in the full ~1500-icon library) are replaced with
+// _icons-minimal, a hand-picked subset of the icons this site actually
+// uses. See _icons-minimal.scss for details. Everything else below is
+// imported straight from the theme, so it stays in sync with upstream.
+@import "css/normalize";
+@import "variables";
+@import "font-awesome/functions";
+@import "font-awesome/variables";
+@import "icons-minimal";
+@import "base";
+@import "content";
+@import "notices";
+@import "navigation";
+@import "pagination";
+@import "tabs";
+@import "taxonomies";
+@import "footer";
+@import "float";
+@import "mastodon";
+@import "syntax";

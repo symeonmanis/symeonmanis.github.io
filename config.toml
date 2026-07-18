@@ -1,8 +1,12 @@
-baseURL = "https://symeonmanis.github.io/"
+baseURL = "https://simosmanis.gr/"
 title = "Simos Manis | Software Engineer"
 theme = "hugo-coder"
-languageCode = "en"
+locale = "en"
 defaultContentLanguage = "en"
+# No blog posts/pages exist, so skip generating the (empty) taxonomy
+# list/term pages (/categories/, /tags/), their sitemap entries, and
+# the RSS feed (which would otherwise just contain the homepage).
+disableKinds = ["taxonomy", "term", "RSS"]
 [pagination]
     pagerSize = 10
 enableEmoji = true
@@ -18,9 +22,10 @@ noClasses = false
 author = "Simos Manis"
 # license = '<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA-4.0</a>'
 description = "Simos Manis personal website"
-keywords = "blog,developer,personal"
+keywords = "software engineer,portfolio,developer"
 info = ["Software Engineer"]
 avatarURL = "images/profile_photo.webp"
+images = ["images/profile_photo.webp"]
 
 #gravatar = "john.doe@example.com"
 #dateFormat = "January 2, 2006"
@@ -122,18 +127,12 @@ customRemoteJS = []
 
 [[params.social]]
 name = "Github"
-icon = "fa fa-2x fa-github"
+icon = "fa-brands fa-github fa-2x"
 weight = 1
 url = "https://github.com/symeonmanis/"
 
-#[[params.social]]
-#name = "LinkedIn"
-#icon = "fa fa-2x fa-linkedin"
-#weight = 2
-#url = "https://www.linkedin.com/in/symeonmanis/"
-
 [[params.social]]
 name = "Email"
-icon = "fa fa-2x fa-envelope"
+icon = "fa-solid fa-envelope fa-2x"
 weight = 3
 url = "mailto:simosmanis@gmail.com"
