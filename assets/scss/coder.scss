@@ -21,3 +21,19 @@
 @import "float";
 @import "mastodon";
 @import "syntax";
+
+// The theme's `.avatar img` rule sets height: auto, which combined with
+// a non-square source image produces an oval (not a circle) once
+// border-radius: 50% is applied. Force a square box + object-fit so it's
+// always a true circle regardless of the source image's aspect ratio.
+// Also sized up from the theme's default 20rem/17rem.
+.avatar img {
+  width: 26rem;
+  height: 26rem;
+  object-fit: cover;
+
+  @media only screen and (max-width: 768px) {
+    width: 20rem;
+    height: 20rem;
+  }
+}
