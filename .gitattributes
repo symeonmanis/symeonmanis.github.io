@@ -1,0 +1,3 @@
+# Normalize all text files to LF line endings, regardless of the
+# platform/editor that checked them out or saved them.
+* text=auto eol=lf
